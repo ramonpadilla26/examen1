@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Adop Animales</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+</head>
+
+<body>
+<div class="container my-2">
+    <div class="card">
+        <div class="card-body">
+            <div th:th:switch="${animales}" class="container my- 5">
+                <p class="my-5">
+                    <a href="/createAnimal" class="btn btn-primary">
+                        <i class="fas fa-dog"> Add Animal</i></a>
+                </p>
+                <div class="col-md-120">
+                    <h2 th:case="null">Adopta Animal !!</h2>
+                    <form th:case="*">
+                        <table class="table table-striped table-responsive-md">
+                            <thead>
+                            <tr>
+                                <th>Tipo Animal</th>
+                                <th>Color</th>
+                                <th>Raza</th>
+                                <th>Tipo Pelo</th>
+                                <th>Fecha Nacimiento</th>
+                                <th>Vacunas</th>
+                                <th>Foto</th>
+
+                                <th>Nombre Dueño</th>
+                                <th>Adoptar</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="animal : ${animales}">
+                                <td th:text="${animal.tipoanimal}"></td>
+                                <td th:text="${animal.color}"></td>
+                                <td th:text="${animal.raza}"></td>
+                                <td th:text="${animal.tipopelo}"></td>
+
+                                <td th:text="${animal.fechaNac}"></td>
+                                <td th:text="${animal.nombredueño}"></td>
+                                <td th:text="${animal.vacunas}"></td>
+                                <td class="w3-container">
+                                    <img th:src="${'data:image/png;base64,'+ animal.str}"
+                                         style="width:100%;max-width:80px" />
+                                </td>
+
+                                <td>
+                                    <a th:href="@{/adopta/{id}(id=${animal.id})}" class="btn btn-primary">
+                                        <i class="fas fa-dog"></i>
+                                    </a>
+                                </td>
+
+
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+</body>
+<script src="scripts.js">   </script>
+</html>
